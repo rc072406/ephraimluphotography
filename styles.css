@@ -1,0 +1,125 @@
+@font-face {
+  font-family: 'Brand Serif';
+  src: url('./fonts/serif-roman.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-primary: #f3f3f4;
+  --text-main: #231f20;
+  --border-subtle: #ebebeb;
+  --border-active: #c6c6c6;
+  --font-family-base: 'Brand Serif', 'Times New Roman', serif;
+}
+
+html, body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-family-base);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.main-wrapper {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.selection-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-item {
+  position: relative;
+  border: 1px solid var(--border-subtle);
+  background-color: transparent;
+  transition: border 0.2s ease-in-out;
+}
+
+.option-item.selected {
+  border: 1px solid var(--border-active) !important;
+}
+
+.option-item label {
+  display: block;
+  width: 100%;
+  padding: 1rem 1rem 1rem 40px;
+  font-size: 14.22px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.option-item label::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--text-main);
+  border-radius: 50%;
+}
+
+.option-item.selected label::after {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--text-main);
+  border-radius: 50%;
+}
+
+.input-select {
+  width: 100%;
+  padding: 13px 35px 13px 10px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  font-family: var(--font-family-base);
+  font-size: 14px;
+  appearance: none;
+  margin-bottom: 20px;
+}
+
+.action-button {
+  width: 100%;
+  background-color: var(--text-main);
+  color: #ffffff;
+  border: none;
+  padding: 18px;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.action-button:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 767px) {
+  .main-wrapper {
+    padding: 0 20px;
+  }
+  
+  .option-item label {
+    font-size: 12px;
+  }
+}
