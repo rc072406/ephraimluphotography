@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ephraim Lu Photography</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <style>
+        :root {
+            --bg-primary: #f3f3f4;
+            --text-main: #231f20;
+            --sidebar-width: 300px;
+            --font-serif: 'Cormorant Garamond', serif;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-serif);
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: url('https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/fc79b6ccae814f40a616b8545df38981/revisions/40e46ccf318c4aac94605f722cd2458b/renditions/a7c6b33e08cd8913f5457532393c7117') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            z-index: 1000;
+            transition: transform var(--transition);
+        }
+
+        .sidebar::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.25);
+            z-index: 1;
+        }
+
+        .sidebar-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+        }
+
+        .brand-logo {
+            font-size: 22px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+            margin-bottom: 60px;
+            font-weight: 400;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 13px;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 60px;
+            background: var(--bg-primary);
+            padding: 0 20px;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1100;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .menu-toggle {
+            cursor: pointer;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .main-hero {
+            margin-left: var(--sidebar-width);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: margin-left var(--transition);
+        }
+
+        .hero-image-container {
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+            background-color: #000;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Snappier fade transition */
+            transition: background-image 0.8s ease-in-out; 
+            /* Faster pan effect (6s down from 12s) */
+            animation: panEffect 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes panEffect {
+            0% { transform: scale(1.0); }
+            100% { transform: scale(1.08) translateX(-1.5%); }
+        }
+
+        .hero-footer {
+            height: 220px;
+            background-color: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+        }
+
+        .hero-title {
+            font-size: clamp(28px, 5vw, 42px);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            width: fit-content;
+        }
+
+        .hero-cta span {
+            border-bottom: 1px solid var(--text-main);
+            margin-right: 10px;
+            padding-bottom: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-header { display: flex; }
+            .sidebar { transform: translateX(-100%); width: 80%; max-width: 300px; }
+            .sidebar.active { transform: translateX(0); }
+            .main-hero { margin-left: 0; padding-top: 60px; }
+            .hero-footer { height: 180px; padding: 0 20px; }
+            .hero-title { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="mobile-header">
+        <a href="index.html" style="text-decoration:none; color:var(--text-main); letter-spacing:2px; font-size:14px;">EPHRAIM LU</a>
+        <div class="menu-toggle" onclick="toggleMenu()">Menu</div>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            <a href="index.html" class="brand-logo">Ephraim Lu</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mywork.html">My Work</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-hero">
+        <div class="hero-image-container">
+            <div id="heroImage" class="hero-image"></div>
+        </div>
+
+        <div class="hero-footer">
+            <h1 class="hero-title">Portfolios & Projects</h1>
+            <a href="mywork.html" class="hero-cta">
+                <span>View Gallery</span> &rarr;
+            </a>
+        </div>
+    </main>
+
+    <script>
+        const images = [
+            'https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/b37961b62f984f518943870c5429bd70/revisions/cd1e78febe5349aab7751928be681dc9/renditions/6561f08a9f532150c6b14464b46e1e07',
+            'https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/4d7f22835cb54214826a82d3f6382982/revisions/d6fe0320d5eb488c98d59009f4c74890/renditions/0c7bbbf941a7439c5242e0d63a0fc3b5'
+        ];
+
+        let currentIndex = 0;
+        const heroEl = document.getElementById('heroImage');
+
+        heroEl.style.backgroundImage = `url('${images[currentIndex]}')`;
+
+        // Quicker rotation: Switch every 12 seconds (matches one full forward/back pan cycle)
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % images.length;
+            heroEl.style.backgroundImage = `url('${images[currentIndex]}')`;
+        }, 12000); 
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const btn = document.querySelector('.menu-toggle');
+            sidebar.classList.toggle('active');
+            btn.innerHTML = sidebar.classList.contains('active') ? "Close" : "Menu";
+        }
+    </script>
+</body>
+</html>
