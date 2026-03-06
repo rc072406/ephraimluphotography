@@ -7,8 +7,54 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
+      .site-footer {
+            margin-left: var(--sidebar-width);
+            padding: 40px 10%;
+            background-color: var(--bg-primary);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            transition: margin-left var(--transition);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 18px;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.5;
+        }
+
+        /* Mobile adjustment for footer */
+        @media (max-width: 768px) {
+            .site-footer {
+                margin-left: 0;
+                padding: 30px 20px;
+            }
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            .social-links a {
+                margin: 0 10px;
+            }
+        }
         :root {
             --bg-primary: #f3f3f4;
             --text-main: #231f20;
@@ -217,9 +263,23 @@
         <div class="hero-footer">
             <h1 class="hero-title">Portfolios & Projects</h1>
             <a href="mywork.html" class="hero-cta">
+
                 <span>View Gallery</span> &rarr;
             </a>
         </div>
+        <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Ephraim Lu Photography</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/ephraim.lu_08/" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/ephraim-lu-749319365/" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
     </main>
 
     <script>
@@ -250,5 +310,4 @@
 </body>
 
 </html>
-
 
