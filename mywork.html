@@ -226,7 +226,7 @@
             "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/9122e401f4fa4067a5bc750479168603/revisions/e69d9533cab74266852ade1d93376426/renditions/d87a4d8e89fec2763647a883dac652b0"
         ];
 
-        // 1. UNIQUE SHUFFLE & PREPEND NEW PHOTO
+        //  SHUFFLE 
         const uniqueOthers = [...new Set(otherPhotos)].sort(() => Math.random() - 0.5);
         const uniquePhotos = [featuredPhoto, ...uniqueOthers]; // Featured photo is now #1
 
@@ -300,3 +300,4 @@
     </script>
 </body>
 </html>
+
