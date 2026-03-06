@@ -141,8 +141,30 @@
         .footer-content { display: flex; justify-content: space-between; align-items: center; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.6; }
         .social-links a { color: var(--text-main); text-decoration: none; margin-left: 20px; font-size: 16px; }
 
+        /* ADDED RESPONSIVE MENU STYLES FROM CONTACT PAGE */
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0; width: 100%; height: 60px;
+            background: var(--bg-primary);
+            padding: 0 20px;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1100;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .menu-toggle {
+            cursor: pointer;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         @media (max-width: 768px) {
+            .mobile-header { display: flex; }
             .sidebar { transform: translateX(-100%); width: 80%; }
+            .sidebar.active { transform: translateX(0); } /* Support the toggle class */
             .work-container, .site-footer { margin-left: 0; }
             .page-title { padding-top: 100px; }
             .film-item { width: 240px; height: 350px; }
@@ -150,6 +172,11 @@
     </style>
 </head>
 <body>
+
+    <header class="mobile-header">
+        <a href="index.html" style="text-decoration:none; color:var(--text-main); letter-spacing:2px; font-size:14px;">EPHRAIM LU</a>
+        <div class="menu-toggle" onclick="toggleMenu()">Menu</div>
+    </header>
 
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-content">
@@ -188,6 +215,14 @@
     </footer>
 
     <script>
+        // ADDED TOGGLE FUNCTION
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const btn = document.querySelector('.menu-toggle');
+            sidebar.classList.toggle('active');
+            btn.innerHTML = sidebar.classList.contains('active') ? "Close" : "Menu";
+        }
+
         const featuredPhoto = "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/0ca6dbd2528643f2b4031336215db8ae/revisions/053f9c67be184060a93ba4150ac819b0/renditions/9392508964251a78b3feb58bef62701a";
         
         const otherPhotos = [
@@ -300,4 +335,3 @@
     </script>
 </body>
 </html>
-
