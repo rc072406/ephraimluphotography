@@ -30,7 +30,7 @@
             overflow-x: hidden;
         }
 
-        /* SIDEBAR - Identical to Home/Work */
+        /* SIDEBAR */
         .sidebar {
             position: fixed;
             left: 0;
@@ -102,13 +102,10 @@
             opacity: 0.6;
         }
 
-        /* MAIN CONTENT AREA */
+        /* MAIN CONTAINER */
         .contact-container {
             margin-left: var(--sidebar-width);
-            padding: 80px 10%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            padding: 80px 10% 0 10%;
             transition: margin-left var(--transition);
         }
 
@@ -116,18 +113,67 @@
             font-size: 32px;
             text-transform: uppercase;
             letter-spacing: 4px;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
             font-weight: 300;
         }
 
-        /* NEW CONTENT STYLES */
-        .content-placeholder {
-            flex-grow: 1;
-            display: flex;
-            align-items: center; /* Centers vertically */
+        /* FLY-AWAY STACK GALLERY */
+        .stack-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 100px auto;
         }
 
+        .stack-area {
+            height: 300vh; /* This controls how long the scroll duration is */
+            position: relative;
+        }
+
+        .photo-card {
+            position: sticky;
+            top: 15vh;
+            width: 100%;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-card img {
+            width: 80%;
+            max-height: 100%;
+            object-fit: cover;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border: 10px solid #fff;
+            background: #fff;
+        }
+
+        /* Tilt and Animation logic */
+        /* Individual tilts for that "scattered" look */
+        .card-1 img { transform: rotate(-3deg); }
+        .card-2 img { transform: rotate(2deg); }
+        .card-3 img { transform: rotate(-2deg); }
+        .card-4 img { transform: rotate(4deg); }
+        .card-5 img { transform: rotate(-1deg); }
+
+        /* Animation: Fly off to the right on scroll */
+        @keyframes flyAway {
+            to { transform: translateX(150%) rotate(10deg); opacity: 0; }
+        }
+
+        /* Applying the scroll animation to the cards (except the last one) */
+        .photo-card:not(:last-child) {
+            view-timeline-name: --card-scroll;
+            view-timeline-axis: block;
+            animation: linear flyAway forwards;
+            animation-timeline: --card-scroll;
+            animation-range: exit 0% exit 100%;
+        }
+
+        /* CONTACT HERO SECTION */
         .contact-hero {
+            padding: 100px 0;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -170,11 +216,11 @@
             transform: translateX(8px) translateY(-5px);
         }
 
-        /* GLOBAL FOOTER - Exact match to Home/Work */
+        /* FOOTER */
         .site-footer {
             padding: 40px 0;
-            background-color: var(--bg-primary);
             border-top: 1px solid rgba(0,0,0,0.05);
+            margin-top: 50px;
         }
 
         .footer-content {
@@ -189,10 +235,8 @@
 
         .social-links a {
             color: var(--text-main);
-            text-decoration: none;
             margin-left: 20px;
             font-size: 16px;
-            transition: opacity 0.3s;
         }
 
         /* MOBILE STYLES */
@@ -217,21 +261,12 @@
 
         @media (max-width: 768px) {
             .mobile-header { display: flex; }
-            .sidebar { transform: translateX(-100%); width: 80%; max-width: 300px; }
+            .sidebar { transform: translateX(-100%); width: 80%; }
             .sidebar.active { transform: translateX(0); }
-            .contact-container { margin-left: 0; padding-top: 100px; padding-left: 20px; padding-right: 20px; }
+            .contact-container { margin-left: 0; padding-top: 100px; }
             .footer-content { flex-direction: column; gap: 20px; text-align: center; }
-            .social-links a { margin: 0 10px; }
-            
-            /* Mobile adjustment for new content */
-            .contact-hero {
-                align-items: center;
-                text-align: center;
-                width: 100%;
-            }
-            .contact-intro {
-                font-size: 22px;
-            }
+            .photo-card { top: 20vh; }
+            .contact-hero { align-items: center; text-align: center; }
         }
     </style>
 </head>
@@ -257,14 +292,30 @@
     <main class="contact-container">
         <h1 class="page-title">Contact</h1>
         
-        <div class="content-placeholder">
-            <div class="contact-hero">
-                <p class="contact-intro">Have a question or a project in mind? Let's connect!</p>
-                <a href="mailto:ephraimlu2026@gmail.com" class="mail-button">
-                    <span>Send a Message</span>
-                    <i class="fa-regular fa-paper-plane"></i>
-                </a>
+        <div class="stack-area">
+            <div class="photo-card card-1">
+                <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/b497176888914284a2d749843bf6ad67/revisions/71d6985562094607a1cb93a04b767791/renditions/903ec3c6f304a135eda3dea4112d5b2f" alt="Photography 1">
             </div>
+            <div class="photo-card card-2">
+                <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/c2c6d272b7704a7faef7c94ff542104a/revisions/c62a510ed96f41f687503246335ab10c/renditions/406280ba260f98edf7e0ee04c2e356e5" alt="Photography 2">
+            </div>
+            <div class="photo-card card-3">
+                <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/c11acc69d15f4c969c438d2c2dd8a90c/revisions/77663e0ec93d4c39aa8f946f651a47f0/renditions/68d98884d85f747668160694cadd5d4c" alt="Photography 3">
+            </div>
+            <div class="photo-card card-4">
+                <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/2a19b988f7954eb491b78b584991799e/revisions/1beae2762f594b1f8feb8e5eccc37893/renditions/3ac90be7446563116e9f5cf718f64e73" alt="Photography 4">
+            </div>
+            <div class="photo-card card-5">
+                <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/d43022f0b2344736817998e0333f3791/revisions/f5749b6bc87440a3a3e700c752dece63/renditions/120fc7e81629812163f66eaded53b4ec" alt="Photography 5">
+            </div>
+        </div>
+
+        <div class="contact-hero">
+            <p class="contact-intro">Have a question or a project in mind? Let's connect!</p>
+            <a href="mailto:ephraimlu2026@gmail.com" class="mail-button">
+                <span>Send a Message</span>
+                <i class="fa-regular fa-paper-plane"></i>
+            </a>
         </div>
 
         <footer class="site-footer">
