@@ -118,15 +118,23 @@
             background-color: #000;
         }
 
+        /* CROSS-FADE SETUP */
         .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            transition: background-image 0.8s ease-in-out; 
+            transition: opacity 2s ease-in-out; /* The 2s handles the fade speed */
             animation: panEffect 6s infinite alternate ease-in-out;
         }
+
+        /* Initial state: one is visible, one is hidden */
+        #heroImage1 { opacity: 1; z-index: 2; }
+        #heroImage2 { opacity: 0; z-index: 1; }
 
         @keyframes panEffect {
             0% { transform: scale(1.0); }
@@ -140,6 +148,7 @@
             flex-direction: column;
             justify-content: center;
             padding: 0 10%;
+            z-index: 5; /* Keep footer above the images */
         }
 
         .hero-title {
@@ -167,13 +176,13 @@
             padding-bottom: 2px;
         }
 
-        /* FOOTER - FIXED FOR CONSISTENCY */
+        /* FOOTER */
         .site-footer {
-            /* No margin-left here because it's inside .main-hero which already has margin */
             padding: 40px 10%;
             background-color: var(--bg-primary);
             border-top: 1px solid rgba(0,0,0,0.05);
             width: 100%;
+            z-index: 5;
         }
 
         .footer-content {
@@ -220,13 +229,15 @@
         }
 
         @media (max-width: 768px) {
+            body.menu-open { overflow: hidden; }
             .mobile-header { display: flex; }
             .sidebar { transform: translateX(-100%); width: 80%; max-width: 300px; }
             .sidebar.active { transform: translateX(0); }
-            .main-hero { margin-left: 0; padding-top: 60px; }
+            .main-hero { margin-left: 0; padding-top: 60px; height: calc(var(--vh, 1vh) * 100); }
+            .hero-image-container { min-height: 40vh; }
             .site-footer { padding: 40px 20px; }
             .footer-content { flex-direction: column; gap: 20px; text-align: center; }
-            .hero-footer { height: 180px; padding: 0 20px; }
+            .hero-footer { height: auto; padding: 40px 20px; }
             .hero-title { font-size: 24px; }
             .social-links a { margin: 0 10px; }
         }
@@ -253,7 +264,8 @@
 
     <main class="main-hero">
         <div class="hero-image-container">
-            <div id="heroImage" class="hero-image"></div>
+            <div id="heroImage1" class="hero-image"></div>
+            <div id="heroImage2" class="hero-image"></div>
         </div>
 
         <div class="hero-footer">
@@ -286,21 +298,58 @@
         ];
 
         let currentIndex = 0;
-        const heroEl = document.getElementById('heroImage');
+        const hero1 = document.getElementById('heroImage1');
+        const hero2 = document.getElementById('heroImage2');
+        let activeHero = hero1;
 
-        heroEl.style.backgroundImage = `url('${images[currentIndex]}')`;
+        // Preload
+        images.forEach(src => { const img = new Image(); img.src = src; });
+
+        // Initial setup
+        hero1.style.backgroundImage = `url('${images[0]}')`;
+        hero2.style.backgroundImage = `url('${images[1]}')`;
 
         setInterval(() => {
             currentIndex = (currentIndex + 1) % images.length;
-            heroEl.style.backgroundImage = `url('${images[currentIndex]}')`;
+            const nextIndex = (currentIndex + 1) % images.length;
+
+            if (activeHero === hero1) {
+                hero1.style.opacity = "0";
+                hero2.style.opacity = "1";
+                activeHero = hero2;
+                // Prepare the next image in the hidden layer after the fade
+                setTimeout(() => {
+                    hero1.style.backgroundImage = `url('${images[nextIndex]}')`;
+                }, 2000);
+            } else {
+                hero2.style.opacity = "0";
+                hero1.style.opacity = "1";
+                activeHero = hero1;
+                setTimeout(() => {
+                    hero2.style.backgroundImage = `url('${images[nextIndex]}')`;
+                }, 2000);
+            }
         }, 12000); 
 
         function toggleMenu() {
             const sidebar = document.getElementById('sidebar');
             const btn = document.querySelector('.menu-toggle');
             sidebar.classList.toggle('active');
-            btn.innerHTML = sidebar.classList.contains('active') ? "Close" : "Menu";
+            if (sidebar.classList.contains('active')) {
+                btn.innerHTML = "Close";
+                document.body.classList.add('menu-open');
+            } else {
+                btn.innerHTML = "Menu";
+                document.body.classList.remove('menu-open');
+            }
         }
+
+        const setVh = () => {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        };
+        window.addEventListener('resize', setVh);
+        setVh();
     </script>
 </body>
 </html>
