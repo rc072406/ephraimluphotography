@@ -30,7 +30,7 @@
             overflow-x: hidden;
         }
 
-        /* SIDEBAR - Styled to match Page 2 */
+        /* SIDEBAR */
         .sidebar {
             position: fixed;
             left: 0;
@@ -50,7 +50,7 @@
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.35); /* Darkened to match Page 2 */
+            background: rgba(0, 0, 0, 0.35);
             z-index: 1;
         }
 
@@ -92,7 +92,6 @@
             border-radius: 2px;
         }
 
-        /* Match Page 2 Active Link Shading */
         .nav-links a.active-page {
             background: rgba(255, 255, 255, 0.15);
             box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
@@ -135,7 +134,7 @@
         }
 
         .hero-footer {
-            height: 220px;
+            height: 180px;
             background-color: var(--bg-primary);
             display: flex;
             flex-direction: column;
@@ -168,30 +167,31 @@
             padding-bottom: 2px;
         }
 
-        /* FOOTER - Updated to match Page 2 exactly */
+        /* FOOTER - FIXED FOR CONSISTENCY */
         .site-footer {
-            margin-left: var(--sidebar-width);
+            /* No margin-left here because it's inside .main-hero which already has margin */
             padding: 40px 10%;
             background-color: var(--bg-primary);
             border-top: 1px solid rgba(0,0,0,0.05);
-            transition: margin-left var(--transition);
+            width: 100%;
         }
 
         .footer-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 11px; /* Smaller to match page 2 */
+            font-size: 11px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            opacity: 0.6; /* Lower opacity to match page 2 */
+            opacity: 0.6;
+            width: 100%;
         }
 
         .social-links a {
             color: var(--text-main);
             text-decoration: none;
             margin-left: 20px;
-            font-size: 16px; /* Matched to page 2 */
+            font-size: 16px;
             transition: opacity 0.3s;
         }
 
@@ -223,8 +223,8 @@
             .mobile-header { display: flex; }
             .sidebar { transform: translateX(-100%); width: 80%; max-width: 300px; }
             .sidebar.active { transform: translateX(0); }
-            .main-hero, .site-footer { margin-left: 0; }
-            .main-hero { padding-top: 60px; }
+            .main-hero { margin-left: 0; padding-top: 60px; }
+            .site-footer { padding: 40px 20px; }
             .footer-content { flex-direction: column; gap: 20px; text-align: center; }
             .hero-footer { height: 180px; padding: 0 20px; }
             .hero-title { font-size: 24px; }
