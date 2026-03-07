@@ -30,7 +30,7 @@
             overflow-x: hidden;
         }
 
-        /* SIDEBAR - Consistent across all pages */
+        /* SIDEBAR */
         .sidebar {
             position: fixed;
             left: 0;
@@ -105,11 +105,15 @@
         /* MAIN CONTENT AREA */
         .about-container {
             margin-left: var(--sidebar-width);
-            padding: 80px 10%;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: space-between; /* Pushes footer to bottom */
             transition: margin-left var(--transition);
+        }
+
+        .about-content-wrapper {
+            padding: 80px 10% 40px 10%;
         }
 
         .page-title {
@@ -121,7 +125,6 @@
         }
 
         .content-placeholder {
-            flex-grow: 1; /* Pushes footer to the bottom */
             line-height: 1.8;
             max-width: 800px;
         }
@@ -130,11 +133,12 @@
             margin-bottom: 1.5em;
         }
 
-        /* GLOBAL FOOTER */
+        /* GLOBAL FOOTER - Matches Index */
         .site-footer {
-            padding: 40px 0;
+            padding: 40px 10%;
             background-color: var(--bg-primary);
             border-top: 1px solid rgba(0,0,0,0.05);
+            width: 100%;
         }
 
         .footer-content {
@@ -179,8 +183,10 @@
             .mobile-header { display: flex; }
             .sidebar { transform: translateX(-100%); width: 80%; max-width: 300px; }
             .sidebar.active { transform: translateX(0); }
-            .about-container { margin-left: 0; padding-top: 100px; padding-left: 20px; padding-right: 20px; }
+            .about-container { margin-left: 0; padding-top: 60px; }
+            .about-content-wrapper { padding: 40px 20px; }
             .footer-content { flex-direction: column; gap: 20px; text-align: center; }
+            .site-footer { padding: 40px 20px; }
             .social-links a { margin: 0 10px; }
         }
     </style>
@@ -205,18 +211,20 @@
     </nav>
 
     <main class="about-container">
-        <h1 class="page-title">About</h1>
-        
-        <div class="content-placeholder">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            </p>
-            <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-                Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
-            </p>
+        <div class="about-content-wrapper">
+            <h1 class="page-title">About</h1>
+            
+            <div class="content-placeholder">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                </p>
+                <p>
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                    Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
+                </p>
+            </div>
         </div>
 
         <footer class="site-footer">
