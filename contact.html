@@ -167,6 +167,27 @@
             animation-range: exit 0% exit 100%;
         }
 
+        /* --- FIREFOX/SAFARI FALLBACK (Desktop) --- */
+        /* If the browser DOES NOT support scroll animations, use the mobile-style stack on desktop */
+        @supports not (animation-timeline: view()) {
+            .stack-area {
+                height: auto !important;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 50px !important;
+                padding-bottom: 60px !important;
+            }
+            .photo-card {
+                position: relative !important;
+                top: 0 !important;
+                height: auto !important;
+                animation: none !important;
+            }
+            .photo-card img {
+                width: 100% !important;
+            }
+        }
+
         /* CONTACT HERO SECTION */
         .contact-hero {
             padding: 100px 0;
@@ -260,40 +281,36 @@
             .sidebar { transform: translateX(-100%); width: 80%; }
             .sidebar.active { transform: translateX(0); }
             
-            /* HIDE LOGO IN MOBILE SIDEBAR */
             .sidebar .brand-logo { display: none; }
             
-            /* MOVE NAV LINKS HIGHER UP */
             .sidebar-content { 
                 justify-content: flex-start; 
-                padding-top: 40px; /* Adjust this value to move links up/down */
+                padding-top: 40px;
             }
 
             .contact-container { margin-left: 0; padding-top: 60px; }
             .contact-content-wrapper { padding: 40px 20px; }
             
-            /* DISABLE STICKY/ANIMATION ON MOBILE FOR SAFARI COMPATIBILITY */
             .stack-area { 
-                height: auto; /* Remove the extra 300vh scroll height */
+                height: auto; 
                 display: flex;
                 flex-direction: column;
-                gap: 40px; /* Space between photos */
+                gap: 40px; 
                 padding-bottom: 60px;
             }
             
             .photo-card { 
-                position: relative; /* Removes sticky behavior */
+                position: relative; 
                 top: 0;
                 height: auto;
-                animation: none !important; /* Disables fly-away animation */
+                animation: none !important;
             }
 
             .photo-card img {
                 width: 100%;
-                transform: none; /* Reset rotation for cleaner mobile stack, or keep if preferred */
+                transform: none;
             }
             
-            /* Re-applying subtle rotations manually for mobile stack look */
             .card-1 img { transform: rotate(-2deg); }
             .card-2 img { transform: rotate(1deg); }
             .card-3 img { transform: rotate(-1.5deg); }
@@ -373,39 +390,6 @@
             const btn = document.querySelector('.menu-toggle');
             sidebar.classList.toggle('active');
             btn.innerHTML = sidebar.classList.contains('active') ? "Close" : "Menu";
-        }
-
-        // FIREFOX FALLBACK: Only runs if CSS scroll-timeline is NOT supported
-        if (!CSS.supports('animation-timeline', 'view-timeline-name')) {
-            const cards = document.querySelectorAll('.photo-card:not(:last-child)');
-            
-            window.addEventListener('scroll', () => {
-                // Only apply logic if screen is desktop width (mimicking your media query)
-                if (window.innerWidth > 768) {
-                    cards.forEach((card) => {
-                        const rect = card.getBoundingClientRect();
-                        const scrollPercent = -rect.top / rect.height;
-                        
-                        if (rect.top < 0) {
-                            const xMove = Math.min(scrollPercent * 150, 150);
-                            const rotate = (scrollPercent * 10);
-                            const opacity = 1 - scrollPercent;
-                            
-                            card.style.transform = `translateX(${xMove}%) rotate(${rotate}deg)`;
-                            card.style.opacity = Math.max(opacity, 0);
-                        } else {
-                            card.style.transform = 'none';
-                            card.style.opacity = 1;
-                        }
-                    });
-                } else {
-                    // Cleanup style if user resizes from desktop to mobile
-                    cards.forEach(card => {
-                        card.style.transform = '';
-                        card.style.opacity = '';
-                    });
-                }
-            });
         }
     </script>
 </body>
