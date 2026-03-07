@@ -233,6 +233,16 @@
             .mobile-header { display: flex; }
             .sidebar { transform: translateX(-100%); width: 80%; max-width: 300px; }
             .sidebar.active { transform: translateX(0); }
+            
+            /* HIDDEN LOGO IN MOBILE SIDEBAR */
+            .sidebar .brand-logo { display: none; }
+            
+            /* MOVE NAV LINKS HIGHER UP */
+            .sidebar-content { 
+                justify-content: flex-start; 
+                padding-top: 40px; 
+            }
+
             .main-hero { margin-left: 0; padding-top: 60px; height: calc(var(--vh, 1vh) * 100); }
             .hero-image-container { min-height: 40vh; }
             .site-footer { padding: 40px 20px; }
