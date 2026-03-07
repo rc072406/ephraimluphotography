@@ -183,6 +183,16 @@
             .mobile-header { display: flex; }
             .sidebar { transform: translateX(-100%); width: 80%; max-width: 300px; }
             .sidebar.active { transform: translateX(0); }
+            
+            /* HIDDEN LOGO IN MOBILE SIDEBAR */
+            .sidebar .brand-logo { display: none; }
+            
+            /* MOVE NAV LINKS HIGHER UP */
+            .sidebar-content { 
+                justify-content: flex-start; 
+                padding-top: 40px; 
+            }
+
             .about-container { margin-left: 0; padding-top: 60px; }
             .about-content-wrapper { padding: 40px 20px; }
             .footer-content { flex-direction: column; gap: 20px; text-align: center; }
