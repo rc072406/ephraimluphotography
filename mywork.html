@@ -141,7 +141,7 @@
         .footer-content { display: flex; justify-content: space-between; align-items: center; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.6; }
         .social-links a { color: var(--text-main); text-decoration: none; margin-left: 20px; font-size: 16px; }
 
-        /* ADDED RESPONSIVE MENU STYLES FROM CONTACT PAGE */
+        /* MOBILE STYLES */
         .mobile-header {
             display: none;
             position: fixed;
@@ -163,8 +163,18 @@
 
         @media (max-width: 768px) {
             .mobile-header { display: flex; }
-            .sidebar { transform: translateX(-100%); width: 80%; }
-            .sidebar.active { transform: translateX(0); } /* Support the toggle class */
+            .sidebar { transform: translateX(-100%); width: 80%; max-width: 300px; }
+            .sidebar.active { transform: translateX(0); }
+            
+            /* HIDDEN LOGO IN MOBILE SIDEBAR */
+            .sidebar .brand-logo { display: none; }
+            
+            /* MOVE NAV LINKS HIGHER UP */
+            .sidebar-content { 
+                justify-content: flex-start; 
+                padding-top: 40px; 
+            }
+
             .work-container, .site-footer { margin-left: 0; }
             .page-title { padding-top: 100px; }
             .film-item { width: 240px; height: 350px; }
@@ -215,7 +225,6 @@
     </footer>
 
     <script>
-        // ADDED TOGGLE FUNCTION
         function toggleMenu() {
             const sidebar = document.getElementById('sidebar');
             const btn = document.querySelector('.menu-toggle');
