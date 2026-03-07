@@ -128,6 +128,8 @@
         .stack-area {
             height: 300vh;
             position: relative;
+            /* Fix for mobile scroll tracking */
+            overflow: visible;
         }
 
         .photo-card {
@@ -259,11 +261,21 @@
             .mobile-header { display: flex; }
             .sidebar { transform: translateX(-100%); width: 80%; }
             .sidebar.active { transform: translateX(0); }
+            
+            /* REMOVE THE DUPLICATE LOGO ON MOBILE */
+            .sidebar .brand-logo { display: none; }
+            /* CENTER NAV LINKS VERTICALLY */
+            .sidebar-content { justify-content: center; }
+
             .contact-container { margin-left: 0; padding-top: 60px; }
             .contact-content-wrapper { padding: 40px 20px; }
             .footer-content { flex-direction: column; gap: 20px; text-align: center; }
             .site-footer { padding: 40px 20px; }
-            .photo-card { top: 20vh; }
+            
+            /* ENSURE STICKY CARDS WORK ON SMALL SCREENS */
+            .photo-card { top: 10vh; height: 50vh; }
+            .photo-card img { width: 90%; }
+
             .contact-hero { align-items: center; text-align: center; }
         }
     </style>
