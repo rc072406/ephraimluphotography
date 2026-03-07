@@ -374,6 +374,39 @@
             sidebar.classList.toggle('active');
             btn.innerHTML = sidebar.classList.contains('active') ? "Close" : "Menu";
         }
+
+        // FIREFOX FALLBACK: Only runs if CSS scroll-timeline is NOT supported
+        if (!CSS.supports('animation-timeline', 'view-timeline-name')) {
+            const cards = document.querySelectorAll('.photo-card:not(:last-child)');
+            
+            window.addEventListener('scroll', () => {
+                // Only apply logic if screen is desktop width (mimicking your media query)
+                if (window.innerWidth > 768) {
+                    cards.forEach((card) => {
+                        const rect = card.getBoundingClientRect();
+                        const scrollPercent = -rect.top / rect.height;
+                        
+                        if (rect.top < 0) {
+                            const xMove = Math.min(scrollPercent * 150, 150);
+                            const rotate = (scrollPercent * 10);
+                            const opacity = 1 - scrollPercent;
+                            
+                            card.style.transform = `translateX(${xMove}%) rotate(${rotate}deg)`;
+                            card.style.opacity = Math.max(opacity, 0);
+                        } else {
+                            card.style.transform = 'none';
+                            card.style.opacity = 1;
+                        }
+                    });
+                } else {
+                    // Cleanup style if user resizes from desktop to mobile
+                    cards.forEach(card => {
+                        card.style.transform = '';
+                        card.style.opacity = '';
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>
