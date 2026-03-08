@@ -108,12 +108,20 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Pushes footer to bottom */
+            justify-content: space-between;
             transition: margin-left var(--transition);
         }
 
         .about-content-wrapper {
             padding: 80px 10% 40px 10%;
+            display: flex;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        .text-side {
+            flex: 1;
+            max-width: 600px;
         }
 
         .page-title {
@@ -126,14 +134,47 @@
 
         .content-placeholder {
             line-height: 1.8;
-            max-width: 800px;
         }
 
         .content-placeholder p {
             margin-bottom: 1.5em;
         }
 
-        /* GLOBAL FOOTER - Matches Index */
+        /* DYNAMIC FILMSTRIP STYLES */
+        .filmstrip-container {
+            width: 300px;
+            height: 600px;
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+        }
+
+        .filmstrip-track {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            animation: verticalScroll 30s linear infinite;
+        }
+
+        .filmstrip-track img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: filter 0.5s;
+        }
+
+        .filmstrip-track img:hover {
+            filter: grayscale(0%);
+        }
+
+        @keyframes verticalScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); } /* Scrolls half the track (the duplicated set) */
+        }
+
+        /* GLOBAL FOOTER */
         .site-footer {
             padding: 40px 10%;
             background-color: var(--bg-primary);
@@ -159,7 +200,7 @@
             transition: opacity 0.3s;
         }
 
-        /* MOBILE STYLES */
+        /* MOBILE RESPONSIVE STYLES */
         .mobile-header {
             display: none;
             position: fixed;
@@ -179,22 +220,42 @@
             letter-spacing: 1px;
         }
 
+        @media (max-width: 1024px) {
+            .about-content-wrapper { flex-direction: column; padding-top: 100px; }
+            
+            /* Change Filmstrip to Horizontal for Mobile */
+            .filmstrip-container {
+                width: 100vw;
+                height: 300px;
+                margin-left: -10%; /* Break out of padding */
+                mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+                -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            }
+
+            .filmstrip-track {
+                flex-direction: row;
+                width: max-content;
+                animation: horizontalScroll 20s linear infinite;
+            }
+
+            .filmstrip-track img {
+                width: 250px;
+                height: 100%;
+            }
+        }
+
+        @keyframes horizontalScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         @media (max-width: 768px) {
             .mobile-header { display: flex; }
             .sidebar { transform: translateX(-100%); width: 80%; max-width: 300px; }
             .sidebar.active { transform: translateX(0); }
-            
-            /* HIDDEN LOGO IN MOBILE SIDEBAR */
             .sidebar .brand-logo { display: none; }
-            
-            /* MOVE NAV LINKS HIGHER UP */
-            .sidebar-content { 
-                justify-content: flex-start; 
-                padding-top: 40px; 
-            }
-
-            .about-container { margin-left: 0; padding-top: 60px; }
-            .about-content-wrapper { padding: 40px 20px; }
+            .sidebar-content { justify-content: flex-start; padding-top: 40px; }
+            .about-container { margin-left: 0; }
             .footer-content { flex-direction: column; gap: 20px; text-align: center; }
             .site-footer { padding: 40px 20px; }
             .social-links a { margin: 0 10px; }
@@ -222,18 +283,32 @@
 
     <main class="about-container">
         <div class="about-content-wrapper">
-            <h1 class="page-title">About</h1>
-            
-            <div class="content-placeholder">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                </p>
-                <p>
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-                <p>
-                    Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
-                </p>
+            <div class="text-side">
+                <h1 class="page-title">About</h1>
+                <div class="content-placeholder">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                    </p>
+                    <p>
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                        Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris.
+                    </p>
+                </div>
+            </div>
+
+            <div class="filmstrip-container">
+                <div class="filmstrip-track">
+                    <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/8633922d688e4ae99fb5afb332ea09fa/revisions/823145aba8ac4332a6f2afb53cd49cbc/renditions/41da5b3e7df9d0ab3c416b5805b25c60">
+                    <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/e220a056b4a94ab584d1fecb13b82977/revisions/76c9fa4156c449b38a0b6347a54101ee/renditions/944cf678041041ca3f0b61288f05b60f">
+                    <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/05fc8a302f864e56b329edbd0ba0bd3c/revisions/dd41435e687a4cd19b047ea522a31b01/renditions/27924901782732c5eaa62978d18c9eda">
+                    <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/c11acc69d15f4c969c438d2c2dd8a90c/revisions/77663e0ec93d4c39aa8f946f651a47f0/renditions/68d98884d85f747668160694cadd5d4c">
+                    <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/8633922d688e4ae99fb5afb332ea09fa/revisions/823145aba8ac4332a6f2afb53cd49cbc/renditions/41da5b3e7df9d0ab3c416b5805b25c60">
+                    <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/e220a056b4a94ab584d1fecb13b82977/revisions/76c9fa4156c449b38a0b6347a54101ee/renditions/944cf678041041ca3f0b61288f05b60f">
+                    <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/05fc8a302f864e56b329edbd0ba0bd3c/revisions/dd41435e687a4cd19b047ea522a31b01/renditions/27924901782732c5eaa62978d18c9eda">
+                    <img src="https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/c11acc69d15f4c969c438d2c2dd8a90c/revisions/77663e0ec93d4c39aa8f946f651a47f0/renditions/68d98884d85f747668160694cadd5d4c">
+                </div>
             </div>
         </div>
 
