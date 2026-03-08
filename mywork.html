@@ -287,7 +287,376 @@
             "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/af10724ac76946bb99578aad607c036a/revisions/4eac7d289e1e4a51af876fda4d22e69d/renditions/41e3c9345bb51ed087e8aa3bf9e5468d",
             "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/0c1c728b5fa34af2a8724ded160cd080/revisions/f0d8b448f6a54a1d84cf89818fcf89fa/renditions/c2e1cd68299c4bf178a5adcefe6ca1b7",
             "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/cfd3fcba85b248e29c3101e63305c8f8/revisions/9ff1b46a9faf45f5b9652d09acc84111/renditions/382c82d94780c2028c3b8fb7f6b65b19",
-            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/e220a056b4a94ab584d1fecb13b82977/revisions/76c9fa4156c449b38a0b6347a54101ee/renditions/944cf678041041ca3f0b61288f05b60f"
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/e220a056b4a94ab584d1fecb13b82977/revisions/76c9fa4156c449b38a0b6347a54101ee/renditions/944cf678041041ca3f0b61288f05b60f",
+            "<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Work | Ephraim Lu Photography</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #f3f3f4;
+            --text-main: #231f20;
+            --sidebar-width: 300px;
+            --font-serif: 'Cormorant Garamond', serif;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --strip-speed: 60s;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-serif);
+            overflow-x: hidden;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            left: 0; top: 0; bottom: 0;
+            width: var(--sidebar-width);
+            background: url('https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/18929a38e65345f0b251c432aa867151/revisions/626b50bcf766438096f628e123bf9928/renditions/0be75ba6a71bebf00caf9a34831986a1') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column; padding: 40px; z-index: 1000;
+            transition: transform var(--transition);
+        }
+        .sidebar::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.35); z-index: 1; }
+        .sidebar-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; color: #fff; }
+        .brand-logo { font-size: 22px; letter-spacing: 5px; text-transform: uppercase; text-decoration: none; color: #fff; margin-bottom: 60px; font-weight: 400; }
+        .nav-links { list-style: none; }
+        .nav-links li { margin-bottom: 25px; }
+        .nav-links a { text-decoration: none; color: #fff; text-transform: uppercase; letter-spacing: 2px; font-size: 13px; transition: all 0.3s; padding: 5px 10px; border-radius: 2px; }
+        .nav-links a.active-page { background: rgba(255, 255, 255, 0.15); box-shadow: inset 0 0 10px rgba(0,0,0,0.1); opacity: 1; }
+        .nav-links a:hover { opacity: 0.6; }
+
+        /* WORK CONTAINER */
+        .work-container {
+            margin-left: var(--sidebar-width);
+            padding: 40px 0;
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center;
+            transition: margin-left var(--transition);
+        }
+
+        .page-title {
+            padding-left: 5%;
+            font-size: 32px; text-transform: uppercase; letter-spacing: 4px;
+            margin-bottom: 20px; font-weight: 300;
+        }
+
+        /* FILM STRIPS */
+        .strip-wrapper {
+            width: 100%; overflow: hidden; position: relative;
+            cursor: pointer; padding: 15px 0;
+        }
+
+        .film-strip {
+            display: flex; white-space: nowrap;
+            width: max-content;
+        }
+
+        .strip-top { animation: scrollLeft var(--strip-speed) linear infinite; }
+        .strip-bottom { animation: scrollRight var(--strip-speed) linear infinite; }
+
+        .strip-wrapper:hover .film-strip { animation-play-state: paused; }
+
+        .film-item {
+            flex: 0 0 auto;
+            width: 320px; height: 460px;
+            margin: 0 12px;
+            background: #e1e1e2; overflow: hidden;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .film-item:hover { transform: translateY(-15px) scale(1.02); z-index: 10; }
+
+        /* HOVER OVERLAY */
+        .item-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .film-item:hover .item-overlay { opacity: 1; }
+        .overlay-text { 
+            color: #fff; text-transform: uppercase; letter-spacing: 3px; font-size: 10px;
+            padding: 10px 20px; border: 1px solid rgba(255,255,255,0.5);
+            background: rgba(0,0,0,0.2); backdrop-filter: blur(2px);
+        }
+
+        .film-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            display: block;
+        }
+
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes scrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(243, 243, 244, 0.98);
+            z-index: 2000; display: none; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-content { max-width: 90%; max-height: 80vh; position: relative; display: flex; align-items: center; }
+        .lightbox-img { max-width: 100%; max-height: 80vh; object-fit: contain; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        
+        .close-lightbox { position: fixed; top: 30px; right: 40px; font-size: 13px; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; opacity: 0.6; z-index: 2100; }
+        .photo-counter { margin-top: 30px; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; opacity: 0.5; }
+
+        .nav-btn { position: fixed; top: 50%; transform: translateY(-50%); font-size: 20px; cursor: pointer; opacity: 0.2; transition: 0.3s; padding: 40px; color: var(--text-main); z-index: 2100; }
+        .nav-btn:hover { opacity: 1; }
+        .prev-btn { left: 20px; }
+        .next-btn { right: 20px; }
+
+        /* FOOTER */
+        .site-footer { margin-left: var(--sidebar-width); padding: 40px 10%; background-color: var(--bg-primary); border-top: 1px solid rgba(0,0,0,0.05); transition: margin-left var(--transition); }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.6; }
+        .social-links a { color: var(--text-main); text-decoration: none; margin-left: 20px; font-size: 16px; }
+
+        /* MOBILE STYLES */
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0; width: 100%; height: 60px;
+            background: var(--bg-primary);
+            padding: 0 20px;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1100;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .menu-toggle {
+            cursor: pointer;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-header { display: flex; }
+            .sidebar { transform: translateX(-100%); width: 80%; max-width: 300px; }
+            .sidebar.active { transform: translateX(0); }
+            
+            /* HIDDEN LOGO IN MOBILE SIDEBAR */
+            .sidebar .brand-logo { display: none; }
+            
+            /* MOVE NAV LINKS HIGHER UP */
+            .sidebar-content { 
+                justify-content: flex-start; 
+                padding-top: 40px; 
+            }
+
+            .work-container, .site-footer { margin-left: 0; }
+            
+            /* MOBILE TITLE ADJUSTMENT */
+            .page-title { 
+                padding-top: 100px; 
+                font-size: 24px; 
+                letter-spacing: 3px; 
+            }
+
+            .film-item { width: 240px; height: 350px; }
+            
+            /* ADJUST NAV BTNS FOR MOBILE */
+            .nav-btn { padding: 20px; }
+            .prev-btn { left: 5px; }
+            .next-btn { right: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="mobile-header">
+        <a href="index.html" style="text-decoration:none; color:var(--text-main); letter-spacing:2px; font-size:14px;">EPHRAIM LU</a>
+        <div class="menu-toggle" onclick="toggleMenu()">Menu</div>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            <a href="index.html" class="brand-logo">Ephraim Lu</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mywork.html" class="active-page">My Work</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="work-container">
+        <h1 class="page-title">Selected Works</h1>
+        <div class="strip-wrapper"><div class="film-strip strip-top" id="strip1"></div></div>
+        <div class="strip-wrapper"><div class="film-strip strip-bottom" id="strip2"></div></div>
+    </main>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox" onclick="closeLightbox()">Close</span>
+        <div class="nav-btn prev-btn" onclick="changeImg(-1)"><i class="fas fa-chevron-left"></i></div>
+        <div class="lightbox-content"><img src="" class="lightbox-img" id="lightboxImg"></div>
+        <div class="nav-btn next-btn" onclick="changeImg(1)"><i class="fas fa-chevron-right"></i></div>
+        <div class="photo-counter" id="photoCounter">01 / 00</div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Ephraim Lu Photography</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/ephraim.lu_08/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/ephraim-lu-749319365/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const btn = document.querySelector('.menu-toggle');
+            sidebar.classList.toggle('active');
+            btn.innerHTML = sidebar.classList.contains('active') ? "Close" : "Menu";
+        }
+
+        const featuredPhoto = "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/0ca6dbd2528643f2b4031336215db8ae/revisions/053f9c67be184060a93ba4150ac819b0/renditions/9392508964251a78b3feb58bef62701a";
+        
+        const otherPhotos = [
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/b497176888914284a2d749843bf6ad67/revisions/71d6985562094607a1cb93a04b767791/renditions/903ec3c6f304a135eda3dea4112d5b2f",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/dd6f4862626042f692e7c2541914119b/revisions/c9640af93be4420ba1b24ac8ac8fee9e/renditions/22e974a1e2d39ed5a701721e4b5c867d",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/48419ebf275148eaa573257f8a91af6e/revisions/8569bd2947844830a6cff75b4ce51956/renditions/5e6ccdc0be0cd7c23715e409348e838d",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/fb657d67b32142d5aa0914daaa1b9e8f/revisions/fc66dee4bfec436398273cbf9a756acd/renditions/742d9751c99743fdb6829205f3e903e3",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/93151beda85c43089be5d07fa2268cbf/revisions/959b0cf0dce5430da0771ed51ec85a11/renditions/232bbe20063cb63092d0ff9f2365285c",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/f4f1896772354ec597d25caeab0376f7/revisions/082769a590884c8eb637ac790d54b697/renditions/a7e3e9c1bc331dfe5118e0044a819d65",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/fc79b6ccae814f40a616b8545df38981/revisions/40e46ccf318c4aac94605f722cd2458b/renditions/6debd5d1d0ba4a496ac6c36cc81462b6",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/d613b087cf3146e1bc39f3946bb73f2a/revisions/10e3846d16ce47a28f4fd966dcd13ca9/renditions/7d6da5a011ec88544cd1203548f1e98d",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/7cc90e9a26aa41699e6e95d89dcbeb21/revisions/05a1fe9b1d49404aa5e39ae85b574b84/renditions/ae61cab6bb6af9574cc7d6d54c7b28be",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/1e28e12c03b64dadafdd1933d03122e0/revisions/7945380e29e74712ad4cd303c3d37566/renditions/09d022e393b6a72e99484564ba159a4e",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/d954c7f13261434e99b49dfbe1d039b9/revisions/4baef793265e46e4ab45ab3b59e4ba7a/renditions/9f488d969f44d777d01fede83be60933",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/3c1cf9c30c8e46a289a7d4ece59122d9/revisions/c0ed312b9d924a7a9e80e91e3b7851b1/renditions/4abfe265f44b1c8549b364eaf2b1fe32",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/d43022f0b2344736817998e0333f3791/revisions/f5749b6bc87440a3a3e700c752dece63/renditions/120fc7e81629812163f66eaded53b4ec",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/05fc8a302f864e56b329edbd0ba0bd3c/revisions/dd41435e687a4cd19b047ea522a31b01/renditions/27924901782732c5eaa62978d18c9eda",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/999260ee99234c80b2471baf6332a75b/revisions/73cf0dc31b9345a0b99c7994486bf28b/renditions/9cebae3e0c38389bb6d1bb674469bf2a",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/8633922d688e4ae99fb5afb332ea09fa/revisions/823145aba8ac4332a6f2afb53cd49cbc/renditions/41da5b3e7df9d0ab3c416b5805b25c60",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/5a86989c56674bc9a70d55b07cdba222/revisions/172ad9f83f144b5ba8429bf6232f7328/renditions/6b6e88ca5ca6ae3818214fe547111c01",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/5950d767712a4432bfaab3b3f0f14b68/revisions/902a12fda34f4a3388d24abd7efc513e/renditions/9fd3334a328b37d0f30dd4d374a9d192",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/2a19b988f7954eb491b78b584991799e/revisions/1beae2762f594b1f8feb8e5eccc37893/renditions/3ac90be7446563116e9f5cf718f64e73",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/c2c6d272b7704a7faef7c94ff542104a/revisions/c62a510ed96f41f687503246335ab10c/renditions/406280ba260f98edf7e0ee04c2e356e5",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/c4a489b100803db648befd8045d9f928/revisions/d52ce6513fc248f8890e4e0d57dd4d62/renditions/254daff898cf555439f9c108dd8901de",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/bbce091685804905b4adf5651aa278df/revisions/f992d27d7bbc4a66bdb42f48a95ccffb/renditions/283ba869d48f277e552deb5a2eeaacb7",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/727634afc58c495189da336e3eff7a61/revisions/8c7554e41a554a1d968ea37b56c6cbf4/renditions/40f3b70063130f223ba58e0f19b2a75c",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/18929a38e65345f0b251c432aa867151/revisions/626b50bcf766438096f628e123bf9928/renditions/0be75ba6a71bebf00caf9a34831986a1",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/04f55b1d165c4c888c9049da4990f6ab/revisions/726496081ff74c18b89d7afb40509c60/renditions/86abf3c3d7443543f344008d51b7ec76",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/461dbae2fb75416690ae122aad0e6299/revisions/0f19bb2e39e94fe48a343067bbb60c56/renditions/c3794efe382c64fb0a386b06629b1051",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/b37961b62f984f518943870c5429bd70/revisions/cd1e78febe5349aab7751928be681dc9/renditions/aa6571a68e1fda2f63363c9ebe8dd02b",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/4d7f22835cb54214826a82d3f6382982/revisions/d6fe0320d5eb488c98d59009f4c74890/renditions/033ef4583f84a1f096ba8ed84269d183",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/a7220f83323542fd98e8e52a5e8d1560/revisions/52c397dc46e64b49a5c36f83ec73759e/renditions/e5b8c5ca0af2745b4df7919823660644",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/c11acc69d15f4c969c438d2c2dd8a90c/revisions/77663e0ec93d4c39aa8f946f651a47f0/renditions/68d98884d85f747668160694cadd5d4c",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/75020ecb917a454a8cd5279fc903551b/revisions/610a0041eb564367bf9b59ac35ce5620/renditions/0a49e44ee9839bc21b5d7842e79f03fa",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/50f0660434154c1e8325cd1876a0ebf9/revisions/fec417569a2b424a83884310f97a826d/renditions/4588a909ea7e98ae86b4cf625671cc9c",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/9122e401f4fa4067a5bc750479168603/revisions/e69d9533cab74266852ade1d93376426/renditions/d87a4d8e89fec2763647a883dac652b0",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/41e6c0d0ea514edd9047be92deb98e72/revisions/7cadee6938094aa3811a3697b23123df/renditions/b99c33ebc7aced592a009610c57ad7c6",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/f14320a5c1924893bab5b7c6a6d2c77e/revisions/ee87d0c7dea44668b3ad0cbc2d1e35a4/renditions/06a62445589c5f64f051769cc5fdd895",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/43753c60ca2148e299d67843bbd24a05/revisions/6b6e995a02e8426792a51f527c7c59b7/renditions/9c6ae8d0d9cbcf1dbb8f0ae87dc1263f",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/a421e704b50b4411ae8a11c5d0df5802/revisions/401b85bd8ff444eab8fad908ce5ee014/renditions/e7d4db4108f5fe40e0ffc047c0b4da54",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/af10724ac76946bb99578aad607c036a/revisions/4eac7d289e1e4a51af876fda4d22e69d/renditions/41e3c9345bb51ed087e8aa3bf9e5468d",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/0c1c728b5fa34af2a8724ded160cd080/revisions/f0d8b448f6a54a1d84cf89818fcf89fa/renditions/c2e1cd68299c4bf178a5adcefe6ca1b7",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/cfd3fcba85b248e29c3101e63305c8f8/revisions/9ff1b46a9faf45f5b9652d09acc84111/renditions/382c82d94780c2028c3b8fb7f6b65b19",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/e220a056b4a94ab584d1fecb13b82977/revisions/76c9fa4156c449b38a0b6347a54101ee/renditions/944cf678041041ca3f0b61288f05b60f",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/6bb4cf0422194a15b574c7a84209224a/revisions/47fff311ad2243d8ae8a0ad1a477fb53/renditions/6fe39a9920ca0ab51044780d4d7ad8cc",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/2b71e33d90c840fcb4fef194767a9e73/revisions/db05a2d43b0743478f74cbce03a7a028/renditions/17a0c40eed7fdc86bf411bfc4272a6a0",
+            "https://lightroom.adobe.com/v2c/spaces/9629d67fbae74310a29c500e5955e5e1/assets/700582b75b029ef14f81ff9fd3d9439b/revisions/2929c1ccc6a64043a9f172be38432c2e/renditions/3cb6504d100af15610630a75c333e96e"
+        ];
+
+        //  SHUFFLE 
+        const uniqueOthers = [...new Set(otherPhotos)].sort(() => Math.random() - 0.5);
+        const uniquePhotos = [featuredPhoto, ...uniqueOthers]; // Featured photo is now #1
+
+        const half = Math.ceil(uniquePhotos.length / 2);
+        const set1 = uniquePhotos.slice(0, half);
+        const set2 = uniquePhotos.slice(half);
+
+        const strip1 = document.getElementById('strip1');
+        const strip2 = document.getElementById('strip2');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const counter = document.getElementById('photoCounter');
+        let currentIdx = 0;
+
+        //  INTERACTIVE ITEMS
+        function createItem(url) {
+            const div = document.createElement('div');
+            div.className = 'film-item';
+            div.innerHTML = `
+                <img src="${url}">
+                <div class="item-overlay">
+                    <span class="overlay-text">View Image</span>
+                </div>
+            `;
+            div.onclick = () => {
+                currentIdx = uniquePhotos.indexOf(url);
+                updateLightbox();
+            };
+            return div;
+        }
+
+        function populate(element, photos) {
+            photos.forEach(url => element.appendChild(createItem(url)));
+            photos.forEach(url => element.appendChild(createItem(url))); // Clone for loop
+        }
+
+        populate(strip1, set1);
+        populate(strip2, set2);
+
+        // 3. LIGHTBOX LOGIC
+        function updateLightbox() {
+            lightboxImg.src = uniquePhotos[currentIdx];
+            const displayIdx = (currentIdx + 1).toString().padStart(2, '0');
+            const total = uniquePhotos.length.toString().padStart(2, '0');
+            counter.innerText = `${displayIdx} / ${total}`;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeImg(dir) {
+            currentIdx = (currentIdx + dir + uniquePhotos.length) % uniquePhotos.length;
+            updateLightbox();
+        }
+
+        // 4. EVENTS
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === "ArrowRight") changeImg(1);
+            if (e.key === "ArrowLeft") changeImg(-1);
+            if (e.key === "Escape") closeLightbox();
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+    </script>
+</body>
+</html>",
         ];
 
         //  SHUFFLE 
