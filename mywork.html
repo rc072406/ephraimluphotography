@@ -213,55 +213,6 @@
             .prev-btn { left: 5px; }
             .next-btn { right: 5px; }
         }
-        .site-footer {
-    padding: 40px 10%;
-    background-color: var(--bg-primary);
-    border-top: 1px solid rgba(0,0,0,0.05);
-    width: 100%;
-    z-index: 5;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    opacity: 0.6;
-    width: 100%;
-}
-
-.social-links a {
-    color: var(--text-main);
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 16px;
-    transition: opacity 0.3s;
-}
-
-.social-links a:hover {
-    opacity: 0.5;
-}
-
-/* Mobile Adjustments */
-@media (max-width: 768px) {
-    .site-footer {
-        margin-left: 0;
-        padding: 40px 20px;
-    }
-
-    .footer-content {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-    }
-
-    .social-links a {
-        margin: 0 10px;
-    }
-}
-        
     </style>
 </head>
 <body>
@@ -297,19 +248,15 @@
         <div class="photo-counter" id="photoCounter">01 / 00</div>
     </div>
 
-   <footer class="site-footer">
-    <div class="footer-content">
-        <p>&copy; 2026- Present Ephraim Lu Photography</p>
-        <div class="social-links">
-            <a href="https://www.instagram.com/ephraim.lu_08/" target="_blank" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/ephraim-lu-749319365/" target="_blank" aria-label="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2026- Present Ephraim Lu Photography</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/ephraim.lu_08/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/ephraim-lu-749319365/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
     <script>
         function toggleMenu() {
